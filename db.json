@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "email": "foo@bar.com",
+      "password": "password1",
+      "avatar": "",
+      "basket": []
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1",
+      "name": "test"
+    }
+  ]
+}

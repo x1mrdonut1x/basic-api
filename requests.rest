@@ -1,0 +1,16 @@
+POST http://localhost:3000/login
+Content-type: application/json
+
+{
+    "id": 1
+}
+
+###
+
+GET http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc5NTQ3NTI4fQ.jaHsEbALI1PPL2jXBQvkVm-vyllnLIo6D_v3EdZu4lg
+
+
+###
+
+GET http://localhost:3000/
