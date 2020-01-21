@@ -4,12 +4,11 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-
 const authService = module.exports = (service) => {
 
   app.post('/register', (req, res) => {
 
-    service.readFile(service.dataPath, (data) => {
+    service.read(data => {
       let users = data.users;
       const {
         email,
@@ -29,8 +28,8 @@ const authService = module.exports = (service) => {
       }
 
       users.push(newUser)
-      data.users = users
-      service.writeFile(service.dataPath, JSON.stringify(data, null, 2), () => {
+      data.users = users;
+      service.write(data, () => {
         res.sendStatus(200);
       });
 
@@ -44,11 +43,11 @@ const authService = module.exports = (service) => {
       password
     } = req.body;
 
-    service.readFile(service.dataPath, (data) => {
+    service.read(data => {
       let users = data.users;
 
       const user = users.find(u => u.email === email)
-      if (user == null) return res.sendStatus(400).end()
+      if (user == null) return res.sendStatus(400)
 
       const result = bcrypt.compareSync(password, user.password)
 

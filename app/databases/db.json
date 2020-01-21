@@ -9,20 +9,8 @@
     },
     {
       "id": "user-2",
-      "email": "faoo@bar.com",
-      "password": "sha1$60246a28$1$62804dd8f49529755a8ef8005bdf57574e083849",
-      "basket": []
-    },
-    {
-      "id": "user-3",
-      "email": "faaoo@bar.com",
-      "password": "$2a$10$TwZ7sONM.EijUN3V9Suli..hHbRfqIW7HUZ3z/xvYvRD/jY2acsWS",
-      "basket": []
-    },
-    {
-      "id": "user-4",
       "email": "foo2@bar.com",
-      "password": "$2a$10$J4L0gcLA1GDtN5EDsrK5/ev.YG0OYzRgacSxSkbPILfnFQ6vlToFa",
+      "password": "$2a$10$XXn.mFTJLHKkwHNdQ7aHo.7ygloCWduxvRwzArnQZF618Ni4KGYs2",
       "basket": []
     }
   ],
