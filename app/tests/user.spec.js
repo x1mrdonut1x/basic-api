@@ -1,25 +1,31 @@
+require('dotenv').config()
 const request = require('supertest')
-const bcrypt = require('bcryptjs');
 
 const {
   readObject,
   writeObject,
 } = require('../utils')
 
-const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync('dupadupa1', salt);
+const {
+  hashPassword
+} = require('../utils')
 
+const jwt = require('jsonwebtoken');
+const accessToken = jwt.sign({
+  id: "user-1"
+}, process.env.TOKEN_SECRET)
+
+const pass = hashPassword('dupadupa1')
 let data = {
   users: [{
     "id": "user-1",
     "firstName": "John",
     "lastName": "Doe",
     "email": "foo2@bar.com",
-    "password": hash,
+    "password": pass,
     "basket": []
   }]
 }
-const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItMSIsImlhdCI6MTU3OTU5Nzg5MH0.im03Y1aNkYfIvLN_mTlg2W6MvT8dwaJonpYU3j9nG6M"
 
 const service = {
   read: readObject(data),
@@ -28,7 +34,7 @@ const service = {
 
 const app = require('../server.js')(service)
 
-describe('/user-', () => {
+describe('/user', () => {
 
   it('return 400 on wrong user id', async() => {
     const res = await request(app)
@@ -42,9 +48,6 @@ describe('/user-', () => {
     const res = await request(app)
       .get('/user/user-1')
       .set('Authorization', 'Bearer ' + 'wrong')
-      .send({
-        email: "foo@bar.com"
-      })
 
     expect(res.statusCode).toEqual(403)
   })
@@ -53,11 +56,46 @@ describe('/user-', () => {
     const res = await request(app)
       .get('/user/user-1')
       .set('Authorization', 'Bearer ' + accessToken)
-      
+
     expect(res.body).toMatchObject({
       "firstName": "John",
       "lastName": "Doe",
       "email": "foo2@bar.com",
     })
+  })
+
+  it('change user password', async() => {
+    const res = await request(app)
+      .put('/user/user-1')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({
+        password: 'new'
+      })
+
+    expect(res.statusCode).toEqual(200)
+    expect(res.body.password).not.toBe(pass)
+  })
+
+  it('change user firstName', async() => {
+    const res = await request(app)
+      .put('/user/user-1')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({
+        firstName: 'new'
+      })
+    expect(res.statusCode).toEqual(200)
+    expect(res.body.firstName).toBe('new')
+  })
+
+  it('change user lastName', async() => {
+    const res = await request(app)
+      .put('/user/user-1')
+      .set('Authorization', 'Bearer ' + accessToken)
+      .send({
+        lastName: 'new'
+      })
+
+    expect(res.statusCode).toEqual(200)
+    expect(res.body.lastName).toBe('new')
   })
 })

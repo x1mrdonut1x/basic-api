@@ -2,12 +2,10 @@
   "users": [
     {
       "id": "user-1",
-      "firsName": "John",
-      "lastName": "Doe",
       "email": "foo@bar.com",
-      "password": "password1",
-      "avatar": "",
-      "basket": []
+      "password": "$2a$10$VcxkxOcjMyhO7VgythUAieZgMCNzwGt6lbXvtF0crgqM.Y.ADctC.",
+      "basket": [],
+      "firstName": "test"
     }
   ],
   "products": [

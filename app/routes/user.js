@@ -2,11 +2,11 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken')
+const {
+  hashPassword
+} = require('../utils')
 
-const userService = module.exports = (service) => {
-  // app.get('/user')
-  // app.put('/user')
-  // app.post('/user')
+const userService = (dependency) => {
 
   // app.post('/user/avatar')
 
@@ -17,9 +17,9 @@ const userService = module.exports = (service) => {
   // app.get('/user/basket/:id')
 
   app.get('/:id', authenticateToken, (req, res) => {
-    service.read(data => {
+    dependency.read(data => {
+      // Find user index in table
       const user = data.users.find(u => u.id === req.params.id)
-
       if (user == null) return res.sendStatus(400)
 
       return res.status(200).json({
@@ -27,6 +27,30 @@ const userService = module.exports = (service) => {
         lastName: user.lastName,
         email: user.email,
       }).end();
+    });
+  })
+
+  app.put('/:id', authenticateToken, (req, res) => {
+    dependency.read(data => {
+      // Find user index in table
+      const userIndex = data.users.findIndex(u => u.id === req.params.id)
+      if (userIndex < 0) return res.sendStatus(400)
+
+      let newUser = {
+        ...data.users[userIndex],
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+      }
+      // Check if password is being changed
+      if (req.body.hasOwnProperty('password')) {
+        newUser.password = hashPassword(req.body.password)
+      }
+      data.users[userIndex] = newUser;
+
+      dependency.write(data, () => {
+        return res.status(200).json(newUser);
+      });
+
     });
   })
 
@@ -44,3 +68,5 @@ const userService = module.exports = (service) => {
   }
   return app
 }
+
+module.exports = userService;

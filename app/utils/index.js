@@ -1,4 +1,5 @@
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
 const readFile = (filePath) => (callback) => {
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -29,9 +30,17 @@ const writeObject = (data, callback) => {
   callback()
 }
 
+const hashPassword = (password) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+
+  return hash
+}
+
 module.exports = {
   readFile,
   writeFile,
   readObject,
-  writeObject
+  writeObject,
+  hashPassword
 };
