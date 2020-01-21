@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "email": "foo@bar.com",
+      "password": "password1",
+      "avatar": "",
+      "basket": []
+    },
+    {
+      "id": "user-2",
+      "email": "faoo@bar.com",
+      "password": "sha1$60246a28$1$62804dd8f49529755a8ef8005bdf57574e083849",
+      "basket": []
+    },
+    {
+      "id": "user-3",
+      "email": "faaoo@bar.com",
+      "password": "$2a$10$TwZ7sONM.EijUN3V9Suli..hHbRfqIW7HUZ3z/xvYvRD/jY2acsWS",
+      "basket": []
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1",
+      "name": "test"
+    }
+  ]
+}
