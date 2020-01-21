@@ -63,14 +63,12 @@ describe('/auth', () => {
   })
 
   it('should succesfully login', async() => {
-    console.log(data)
     const res = await request(app)
       .post('/auth/login')
       .send({
         email: "foo@bar.com",
         password: "dupadupa1"
       })
-
     expect(res.statusCode).toEqual(200)
   })
 })

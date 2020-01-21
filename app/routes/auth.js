@@ -57,9 +57,9 @@ const authService = module.exports = (service) => {
       const accessToken = jwt.sign({
         id: user.id
       }, process.env.TOKEN_SECRET)
-      res.json({
+      return res.status(200).json({
         accessToken
-      })
+      }).end()
     })
   })
 
