@@ -8,8 +8,6 @@ const {
 
 const userService = (dependency) => {
 
-  // app.post('/user/avatar')
-
   app.get('/', authenticateToken, (req, res) => {
     dependency.read(data => {
       // Find user in table

@@ -8,13 +8,6 @@ const {
 
 const userBasketService = (dependency) => {
 
-
-  // app.get('/user/basket')
-  // app.put('/user/basket')
-  // app.post('/user/basket')
-  // app.delete('/user/basket/')
-  // app.get('/user/basket/:id')
-
   app.get('/', authenticateToken, (req, res) => {
     dependency.read(data => {
       const user = data.users.find(u => u.id === req.user.id)
@@ -62,13 +55,10 @@ const userBasketService = (dependency) => {
     dependency.read(data => {
       // Find user index in table
       const userIndex = data.users.findIndex(u => u.id === req.user.id)
-      console.log(userIndex)
       if (userIndex < 0) return res.sendStatus(400).end()
 
       const productIndex = data.users[userIndex].basket.findIndex(u => u.id === req.params.id)
-      console.log(productIndex)
       if (productIndex < 0) return res.sendStatus(400).end()
-      console.log(data.users[userIndex])
 
       data.users[userIndex].basket.splice(productIndex, 1)
 
