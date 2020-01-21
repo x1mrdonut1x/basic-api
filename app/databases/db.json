@@ -3,9 +3,8 @@
     {
       "id": "user-1",
       "email": "foo@bar.com",
-      "password": "$2a$10$VcxkxOcjMyhO7VgythUAieZgMCNzwGt6lbXvtF0crgqM.Y.ADctC.",
-      "basket": [],
-      "firstName": "test"
+      "password": "$2a$10$2KTP3nyeiN2ZcBwOqqhoP.rS7HEs9pKicqhDz412unelM2t/WMLW.",
+      "basket": []
     }
   ],
   "products": [

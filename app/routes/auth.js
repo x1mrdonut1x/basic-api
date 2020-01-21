@@ -7,11 +7,11 @@ const {
   hashPassword
 } = require('../utils')
 
-const authService = module.exports = (service) => {
+const authService = module.exports = (dependency) => {
 
   app.post('/register', (req, res) => {
 
-    service.read(data => {
+    dependency.read(data => {
       let users = data.users;
       const {
         email,
@@ -19,7 +19,7 @@ const authService = module.exports = (service) => {
       } = req.body;
 
       // User already found
-      if (users.findIndex(u => u.email === email) > -1) return res.sendStatus(400).end()
+      if (users.find(u => u.email === email)) return res.sendStatus(400).end()
 
       const newUser = {
         id: `user-${users.length + 1}`,
@@ -30,8 +30,8 @@ const authService = module.exports = (service) => {
 
       users.push(newUser)
       data.users = users;
-      service.write(data, () => {
-        res.sendStatus(200);
+      dependency.write(data, () => {
+        return res.sendStatus(200);
       });
 
     })
@@ -43,7 +43,7 @@ const authService = module.exports = (service) => {
       password
     } = req.body;
 
-    service.read(data => {
+    dependency.read(data => {
       let users = data.users;
 
       // Check if user exists

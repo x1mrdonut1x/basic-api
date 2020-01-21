@@ -6,6 +6,7 @@ const serverService = (dependencies) => {
 
   app.use('/auth', require('./routes/auth')(dependencies))
   app.use('/user', require('./routes/user')(dependencies))
+  app.use('/user/basket', require('./routes/basket')(dependencies))
   app.use('/products', require('./routes/products')(dependencies))
 
   app.all('*', (req, res) => res.sendStatus(404))

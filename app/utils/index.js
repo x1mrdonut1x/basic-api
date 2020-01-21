@@ -1,5 +1,7 @@
+require('dotenv').config()
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 const readFile = (filePath) => (callback) => {
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -37,10 +39,24 @@ const hashPassword = (password) => {
   return hash
 }
 
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if (token === null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403)
+    req.user = user
+    next()
+  })
+}
+
 module.exports = {
   readFile,
   writeFile,
   readObject,
   writeObject,
-  hashPassword
+  hashPassword,
+  authenticateToken
 };

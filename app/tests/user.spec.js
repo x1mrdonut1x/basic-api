@@ -36,17 +36,9 @@ const app = require('../server.js')(service)
 
 describe('/user', () => {
 
-  it('return 400 on wrong user id', async() => {
-    const res = await request(app)
-      .get('/user/user-2')
-      .set('Authorization', 'Bearer ' + accessToken)
-
-    expect(res.statusCode).toEqual(400)
-  })
-
   it('return 401 on wrong token', async() => {
     const res = await request(app)
-      .get('/user/user-1')
+      .get('/user')
       .set('Authorization', 'Bearer ' + 'wrong')
 
     expect(res.statusCode).toEqual(403)
@@ -54,7 +46,7 @@ describe('/user', () => {
 
   it('show user data', async() => {
     const res = await request(app)
-      .get('/user/user-1')
+      .get('/user')
       .set('Authorization', 'Bearer ' + accessToken)
 
     expect(res.body).toMatchObject({
@@ -66,7 +58,7 @@ describe('/user', () => {
 
   it('change user password', async() => {
     const res = await request(app)
-      .put('/user/user-1')
+      .put('/user')
       .set('Authorization', 'Bearer ' + accessToken)
       .send({
         password: 'new'
@@ -78,7 +70,7 @@ describe('/user', () => {
 
   it('change user firstName', async() => {
     const res = await request(app)
-      .put('/user/user-1')
+      .put('/user')
       .set('Authorization', 'Bearer ' + accessToken)
       .send({
         firstName: 'new'
@@ -89,7 +81,7 @@ describe('/user', () => {
 
   it('change user lastName', async() => {
     const res = await request(app)
-      .put('/user/user-1')
+      .put('/user')
       .set('Authorization', 'Bearer ' + accessToken)
       .send({
         lastName: 'new'
@@ -97,5 +89,13 @@ describe('/user', () => {
 
     expect(res.statusCode).toEqual(200)
     expect(res.body.lastName).toBe('new')
+  })
+
+  it('remove user', async() => {
+    const res = await request(app)
+      .delete('/user')
+      .set('Authorization', 'Bearer ' + accessToken)
+
+    expect(res.statusCode).toEqual(200)
   })
 })
