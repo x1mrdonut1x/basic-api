@@ -1,8 +1,8 @@
-POST http://localhost:3000/login
+POST http://localhost:3000/auth/login
 content-type: application/json
 
 {
-    "email": "faaoao@bar.com",
+    "email": "faaoo@bar.com",
     "password": "dupaadupa1"
 }
 ###
@@ -17,7 +17,7 @@ GET http://localhost:3000/
 
 ###
 
-POST http://localhost:3000/register
+POST http://localhost:3000/auth/register
 Content-type: application/json
 
 {

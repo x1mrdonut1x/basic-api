@@ -18,6 +18,12 @@
       "email": "faaoo@bar.com",
       "password": "$2a$10$TwZ7sONM.EijUN3V9Suli..hHbRfqIW7HUZ3z/xvYvRD/jY2acsWS",
       "basket": []
+    },
+    {
+      "id": "user-4",
+      "email": "foo2@bar.com",
+      "password": "$2a$10$J4L0gcLA1GDtN5EDsrK5/ev.YG0OYzRgacSxSkbPILfnFQ6vlToFa",
+      "basket": []
     }
   ],
   "products": [

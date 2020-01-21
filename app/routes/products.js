@@ -4,8 +4,11 @@ const app = module.exports = express();
 const fs = require('fs');
 const jwt = require('jsonwebtoken')
 
-app.get('/products')
-app.put('/products')
-app.post('/products')
-app.delete('/products')
-app.get('/products/:id')
+const productService = module.exports = (dataPath) => {
+  app.get('/products')
+  app.put('/products')
+  app.post('/products')
+  app.delete('/products')
+  app.get('/products/:id')
+  return app
+}
