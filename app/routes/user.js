@@ -1,29 +1,32 @@
 require('dotenv').config()
 const express = require('express');
-const app = module.exports = express();
-const fs = require('fs');
+const app = express();
 const jwt = require('jsonwebtoken')
 
-const userService = module.exports = (dataPath) => {
-  app.get('/user')
-  app.put('/user')
-  app.post('/user')
+const userService = module.exports = (service) => {
+  // app.get('/user')
+  // app.put('/user')
+  // app.post('/user')
 
-  app.post('/user/avatar')
+  // app.post('/user/avatar')
 
-  app.get('/user/basket')
-  app.put('/user/basket')
-  app.post('/user/basket')
-  app.delete('/user/basket/')
-  app.get('/user/basket/:id')
+  // app.get('/user/basket')
+  // app.put('/user/basket')
+  // app.post('/user/basket')
+  // app.delete('/user/basket/')
+  // app.get('/user/basket/:id')
 
-  app.get('/user', authenticateToken, (req, res) => {
-    fs.readFile(__dirname + "/" + "db.json", 'utf8', (err, data) => {
-      const users = JSON.parse(data);
+  app.get('/:id', authenticateToken, (req, res) => {
+    service.read(data => {
+      const user = data.users.find(u => u.id === req.params.id)
 
-      const user = users.find(u => u.id === req.user.id)
-      console.log(req.user)
-      res.json(user);
+      if (user == null) return res.sendStatus(400)
+
+      return res.status(200).json({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      }).end();
     });
   })
 

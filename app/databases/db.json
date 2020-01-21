@@ -2,15 +2,11 @@
   "users": [
     {
       "id": "user-1",
+      "firsName": "John",
+      "lastName": "Doe",
       "email": "foo@bar.com",
       "password": "password1",
       "avatar": "",
-      "basket": []
-    },
-    {
-      "id": "user-2",
-      "email": "foo2@bar.com",
-      "password": "$2a$10$XXn.mFTJLHKkwHNdQ7aHo.7ygloCWduxvRwzArnQZF618Ni4KGYs2",
       "basket": []
     }
   ],

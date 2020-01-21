@@ -2,13 +2,13 @@ POST http://localhost:4000/auth/login
 content-type: application/json
 
 {
-    "email": "faaoo@bar.com",
-    "password": "dupaadupa1"
+    "email": "faaaaoo@bar.com",
+    "password": "dupadupa1"
 }
 ###
 
 GET http://localhost:4000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTc5NTQ3NTI4fQ.jaHsEbALI1PPL2jXBQvkVm-vyllnLIo6D_v3EdZu4lg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItMyIsImlhdCI6MTU3OTU5ODA1Mn0.O-T27iJC7FOd7YiTdjvqknMTor4lGrDC_hZ0mxwUlqY
 
 
 ###
