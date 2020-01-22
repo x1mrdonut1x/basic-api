@@ -18,6 +18,7 @@ const userService = (dependency) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        basket: user.basket
       });
     });
   })

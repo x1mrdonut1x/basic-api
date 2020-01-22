@@ -7,6 +7,8 @@ import Spacer from "components/spacer/Spacer";
 function Register() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
   const history = useHistory();
 
   const handleRegister = () => {
@@ -15,7 +17,7 @@ function Register() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password, firstName, lastName })
     })
       .then(() => history.push("/auth/login"))
       .catch(e => console.log(e));
@@ -29,13 +31,13 @@ function Register() {
           <Col span={11}>
             <Input
               placeholder="First Name"
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => setFirstName(e.target.value)}
             />
           </Col>
           <Col span={11}>
             <Input
               placeholder="Last Name"
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => setLastName(e.target.value)}
             />
           </Col>
           <Spacer />

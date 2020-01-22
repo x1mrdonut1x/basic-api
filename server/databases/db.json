@@ -1,28 +1,24 @@
 {
   "users": [
     {
-      "id": "user-1",
-      "email": "foo@bar.com",
-      "password": "$2a$10$2KTP3nyeiN2ZcBwOqqhoP.rS7HEs9pKicqhDz412unelM2t/WMLW.",
-      "basket": []
-    },
-    {
       "id": "user-2",
+      "firstName": "Alex",
+      "lastName": "Niznik",
       "email": "test",
-      "password": "$2a$10$5rh6hYSYOQeJZ31d4wJVDOHIsu1YXojemllM9vNYEysVByoeErrCW",
-      "basket": []
-    },
-    {
-      "id": "user-3",
-      "email": "testst",
-      "password": "$2a$10$88cRMrY622.Sdl1k0fOz3eImbtrrHIgJeVZxXQKKhC85gin7aHu1u",
-      "basket": []
+      "password": "$2a$10$vO7U1IV0GqyNpGW0rbasNOri0XJJcuT4Kg4awfOSi11zN3BD6cRgS",
+      "basket": ["prod-1", "prod-2"]
     }
   ],
   "products": [
     {
       "id": "prod-1",
-      "name": "test"
+      "name": "Phone",
+      "price": 40
+    },
+    {
+      "id": "prod-2",
+      "name": "Watch",
+      "price": 20
     }
   ]
 }

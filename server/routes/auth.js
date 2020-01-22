@@ -14,8 +14,10 @@ const authService = module.exports = (dependency) => {
     dependency.read(data => {
       let users = data.users;
       const {
+        firstName,
+        lastName,
         email,
-        password
+        password,
       } = req.body;
 
       // User already found
@@ -23,6 +25,8 @@ const authService = module.exports = (dependency) => {
 
       const newUser = {
         id: `user-${users.length + 1}`,
+        firstName,
+        lastName,
         email,
         password: hashPassword(password),
         basket: [],

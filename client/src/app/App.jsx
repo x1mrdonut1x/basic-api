@@ -15,14 +15,14 @@ import User from "pages/user/User";
 function App() {
   return (
     <Router>
-        <Switch>
-      <AuthProvider>
-          <Redirect exact from="/" to="/auth" />
-          <PrivateRoute path="/user" component={User} />
+      <Switch>
+        <AuthProvider>
+          <Redirect exact from="/" to="/user" />
+          <PrivateRoute path={"/user"} component={User} />
           <Route path="/auth" component={Auth} />
           <Route path="/products" component={Products} />
-      </AuthProvider>
-        </Switch>
+        </AuthProvider>
+      </Switch>
     </Router>
   );
 }

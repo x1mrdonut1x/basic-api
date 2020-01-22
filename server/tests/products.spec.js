@@ -19,7 +19,7 @@ const service = {
   write: writeObject
 }
 
-const app = require('../server.js')(service)
+const app = require('../index.js')(service)
 
 describe('/products', () => {
 

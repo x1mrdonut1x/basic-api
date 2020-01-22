@@ -13,7 +13,15 @@ const userBasketService = (dependency) => {
       const user = data.users.find(u => u.id === req.user.id)
       if (user == null) return res.sendStatus(400).end()
 
-      return res.status(200).json(user.basket);
+      let basketProducts = []
+      user.basket.forEach(productId => {
+        let temp = data.products.find(p => {
+            return p.id === productId
+          })
+        if (temp != null) basketProducts.push(temp)
+      })
+      
+      return res.status(200).json(basketProducts);
     });
   })
 
@@ -24,7 +32,7 @@ const userBasketService = (dependency) => {
       if (user == null) return res.sendStatus(400).end()
 
       // Find product in table
-      const product = user.basket.find(prod => prod.id === req.params.id)
+      const product = data.products.find(prod => prod.id === req.params.id)
       if (product == null) return res.sendStatus(400).end()
 
       return res.status(200).json(product);
@@ -42,7 +50,7 @@ const userBasketService = (dependency) => {
       const product = data.products.find(prod => prod.id === req.body.id)
       if (product == null) return res.sendStatus(400).end()
 
-      user.basket.push(product);
+      user.basket.push(product.id);
       data.user = user;
 
       dependency.write(data, () => {
@@ -57,7 +65,7 @@ const userBasketService = (dependency) => {
       const userIndex = data.users.findIndex(u => u.id === req.user.id)
       if (userIndex < 0) return res.sendStatus(400).end()
 
-      const productIndex = data.users[userIndex].basket.findIndex(u => u.id === req.params.id)
+      const productIndex = data.users[userIndex].basket.findIndex(p => p === req.params.id)
       if (productIndex < 0) return res.sendStatus(400).end()
 
       data.users[userIndex].basket.splice(productIndex, 1)

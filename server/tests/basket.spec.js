@@ -25,7 +25,7 @@ let data = {
     "id": "user-1",
     "firstName": "John",
     "lastName": "Doe",
-    "basket": products
+    "basket": ["prod-1", "prod-2"]
   }],
   products
 }
@@ -35,7 +35,7 @@ const service = {
   write: writeObject
 }
 
-const app = require('../server.js')(service)
+const app = require('../index.js')(service)
 
 describe('/user/basket', () => {
 
@@ -71,19 +71,7 @@ describe('/user/basket', () => {
         id: 'prod-1'
       })
 
-    expect(res.body).toMatchObject([{
-      id: 'prod-1',
-      name: 'bike',
-      price: '10'
-    }, {
-      id: 'prod-2',
-      name: 'car',
-      price: '20'
-    }, {
-      id: 'prod-1',
-      name: 'bike',
-      price: '10'
-    }])
+    expect(res.body).toMatchObject(["prod-1", "prod-2", "prod-1"])
   })
 
 
@@ -92,15 +80,7 @@ describe('/user/basket', () => {
       .delete('/user/basket/prod-1')
       .set('Authorization', 'Bearer ' + accessToken)
 
-    expect(res.body).toMatchObject([{
-      id: 'prod-2',
-      name: 'car',
-      price: '20'
-    }, {
-      id: 'prod-1',
-      name: 'bike',
-      price: '10'
-    }])
+    expect(res.body).toMatchObject(['prod-2', 'prod-1'])
   })
 
 })

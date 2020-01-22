@@ -21,9 +21,8 @@ function Login() {
         return response.json();
       })
       .then(json => {
-          
-        // localStorage.setItem('accessToken', JSON.stringify(user));
-        history.push("/user", { accessToken: json.accessToken });
+        localStorage.setItem('accessToken', json.accessToken)
+        history.push("/user");
       })
       .catch(e => console.log(e));
   };

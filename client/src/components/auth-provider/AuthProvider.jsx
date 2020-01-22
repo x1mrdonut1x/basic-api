@@ -6,36 +6,39 @@ const AuthContext = React.createContext();
 
 function AuthProvider(props) {
   const location = useLocation();
-  const [authState, setAuthState] = useState("unauthorized");
-  //   const [accessToken, setAccessToken] = useState(null);
+  const [authState, setAuthState] = useState("initial");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    console.log(location);
-    console.log((location.state || {}).accessToken);
     getUser();
   }, [location]);
 
   const getUser = () => {
+    const accessToken = localStorage.getItem("accessToken");
     fetch("http://localhost:4000/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + (location.state || {}).accessToken
+        Authorization: "Basic " + accessToken
       }
     })
       .then(response => {
         if (response.status === 200) {
           setAuthState("authorized");
-          console.log(response.status);
+          return response.json();
+        } else {
+          setAuthState("unauthorized");
+          throw new Error("Unauthorized");
         }
       })
-      .catch(e => console.log(e));
+      .then(json => setUser(json))
+      .catch(e => e);
   };
 
   const { children } = props;
 
   return (
-    <AuthContext.Provider value={{ authState }}>
+    <AuthContext.Provider value={{ authState, user }}>
       {children}
     </AuthContext.Provider>
   );

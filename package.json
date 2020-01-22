@@ -17,8 +17,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "server": "nodemon index.js",
-    "client": "nodemon index.js --prefix client",
+    "start": "nodemon index.js",
     "test": "jest"
   },
   "keywords": [],
