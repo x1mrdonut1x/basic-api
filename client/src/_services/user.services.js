@@ -18,14 +18,14 @@ const login = (email, password) => {
 
 const register = (user, callback) => {
   return fetch("http://localhost:4000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ...user
-      })
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ...user
     })
+  })
 };
 
 const getBasket = () => {
@@ -34,13 +34,55 @@ const getBasket = () => {
   return fetch("http://localhost:4000/user/basket", {
       method: "GET",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Basic " + accessToken
       }
     })
     .then(response => response.json())
     .then(json => json);
 };
+
+const getProducts = () => {
+  return fetch("http://localhost:4000/products", {
+      method: "GET",
+    })
+    .then(response => response.json())
+    .then(json => json);
+};
+
+const addToBasket = (productId) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  return fetch("http://localhost:4000/user/basket", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + accessToken
+      },
+      body: JSON.stringify({
+        id: productId
+      })
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => json);
+}
+
+const removeFromBasket = (productId) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  return fetch(`http://localhost:4000/user/basket/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + accessToken
+      }
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => json);
+}
 
 const logout = () => {
   return new Promise(resolve => {
@@ -56,7 +98,6 @@ const getSelf = () => {
   return fetch("http://localhost:4000/user", {
       method: "GET",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         Authorization: "Basic " + accessToken
       }
     })
@@ -75,5 +116,8 @@ export const userService = {
   logout,
   register,
   getBasket,
-  getSelf
+  getSelf,
+  getProducts,
+  addToBasket,
+  removeFromBasket
 }

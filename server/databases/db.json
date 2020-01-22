@@ -7,8 +7,10 @@
       "email": "test",
       "password": "$2a$10$vO7U1IV0GqyNpGW0rbasNOri0XJJcuT4Kg4awfOSi11zN3BD6cRgS",
       "basket": [
-        "prod-1",
-        "prod-2"
+        "prod-2",
+        "prod-3",
+        "prod-2",
+        "prod-1"
       ]
     },
     {
@@ -44,5 +46,19 @@
       "name": "Car",
       "price": 199
     }
-  ]
+  ],
+  "user": {
+    "id": "user-1",
+    "firstName": "Alex",
+    "lastName": "Niznik",
+    "email": "test",
+    "password": "$2a$10$vO7U1IV0GqyNpGW0rbasNOri0XJJcuT4Kg4awfOSi11zN3BD6cRgS",
+    "basket": [
+      "prod-2",
+      "prod-2",
+      "prod-3",
+      "prod-2",
+      "prod-1"
+    ]
+  }
 }
