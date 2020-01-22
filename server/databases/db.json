@@ -5,6 +5,18 @@
       "email": "foo@bar.com",
       "password": "$2a$10$2KTP3nyeiN2ZcBwOqqhoP.rS7HEs9pKicqhDz412unelM2t/WMLW.",
       "basket": []
+    },
+    {
+      "id": "user-2",
+      "email": "test",
+      "password": "$2a$10$5rh6hYSYOQeJZ31d4wJVDOHIsu1YXojemllM9vNYEysVByoeErrCW",
+      "basket": []
+    },
+    {
+      "id": "user-3",
+      "email": "testst",
+      "password": "$2a$10$88cRMrY622.Sdl1k0fOz3eImbtrrHIgJeVZxXQKKhC85gin7aHu1u",
+      "basket": []
     }
   ],
   "products": [
