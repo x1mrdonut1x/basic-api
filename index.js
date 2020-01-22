@@ -4,15 +4,15 @@ const app = express();
 const {
   readFile,
   writeFile,
-} = require('./app/utils')
+} = require('./server/utils')
 
-const dataPath = `${__dirname}/app/databases/db.json`
+const dataPath = `${__dirname}/server/databases/db.json`
 
 const service = {
   read: readFile(dataPath),
   write: writeFile(dataPath)
 }
-const routes = require('./app/server.js')(service)
+const routes = require('./server')(service)
 
 app.use(routes)
 
