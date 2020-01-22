@@ -1,12 +1,31 @@
 {
   "users": [
     {
-      "id": "user-2",
+      "id": "user-1",
       "firstName": "Alex",
       "lastName": "Niznik",
       "email": "test",
       "password": "$2a$10$vO7U1IV0GqyNpGW0rbasNOri0XJJcuT4Kg4awfOSi11zN3BD6cRgS",
-      "basket": ["prod-1", "prod-2"]
+      "basket": [
+        "prod-1",
+        "prod-2"
+      ]
+    },
+    {
+      "id": "user-2",
+      "firstName": "as",
+      "lastName": "asd",
+      "email": "ww",
+      "password": "$2a$10$TvChd14TzZw44WJcObF.oe/CAe8klY47uVdJxDSJnC1AnBeiX.lye",
+      "basket": []
+    },
+    {
+      "id": "user-3",
+      "firstName": "aa",
+      "lastName": "dddd",
+      "email": "dd",
+      "password": "$2a$10$i/3ZzjXyq.oSQ7aVBBOAx.xhJm0x53/NxyyLUiOQk539VTMRwZ.iO",
+      "basket": []
     }
   ],
   "products": [
@@ -19,6 +38,11 @@
       "id": "prod-2",
       "name": "Watch",
       "price": 20
+    },
+    {
+      "id": "prod-3",
+      "name": "Car",
+      "price": 199
     }
   ]
 }

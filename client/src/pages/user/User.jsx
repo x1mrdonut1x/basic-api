@@ -5,6 +5,7 @@ import { AuthContext } from "components/auth-provider/AuthProvider";
 import Spacer from "components/spacer/Spacer";
 import styles from "./User.style";
 import { useHistory } from "react-router-dom";
+import { userService } from "_services/user.services";
 import withStyles from "react-jss";
 
 function User({ classes }) {
@@ -17,25 +18,20 @@ function User({ classes }) {
   }, [history]);
 
   const logOut = () => {
-    localStorage.removeItem("accessToken");
-    history.replace("/auth/login");
+    userService.logout().then(() => history.replace("/auth/login"));
   };
-  
+
   const getBasket = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    fetch("http://localhost:4000/user/basket", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + accessToken
-      }
-    })
-      .then(response => response.json())
-      .then(json => setBasket(json));
+    userService.getBasket().then(data => setBasket(data));
   };
-  
+
   return (
-    <Row type="flex" justify="center" align="middle">
+    <Row
+      type="flex"
+      justify="center"
+      align="middle"
+      className={classes.wrapper}
+    >
       <Col>
         <Card
           className={classes.card}

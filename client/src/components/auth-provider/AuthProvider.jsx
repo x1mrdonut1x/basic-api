@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
+import { userService } from "_services/user.services";
 
 const AuthContext = React.createContext();
 
@@ -14,25 +15,16 @@ function AuthProvider(props) {
   }, [location]);
 
   const getUser = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    fetch("http://localhost:4000/user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + accessToken
-      }
-    })
-      .then(response => {
-        if (response.status === 200) {
-          setAuthState("authorized");
-          return response.json();
-        } else {
-          setAuthState("unauthorized");
-          throw new Error("Unauthorized");
-        }
+    userService
+      .getSelf()
+      .then(json => {
+        setAuthState("authorized");
+        setUser(json);
       })
-      .then(json => setUser(json))
-      .catch(e => e);
+      .catch(e => {
+        setAuthState("unauthorized");
+        setUser({});
+      });
   };
 
   const { children } = props;

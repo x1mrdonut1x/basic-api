@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import Spacer from "components/spacer/Spacer";
+import { userService } from "_services/user.services";
 
 function Register() {
   const [email, setEmail] = useState(null);
@@ -12,15 +13,9 @@ function Register() {
   const history = useHistory();
 
   const handleRegister = () => {
-    fetch("http://localhost:4000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password, firstName, lastName })
-    })
-      .then(() => history.push("/auth/login"))
-      .catch(e => console.log(e));
+    userService
+      .register({ email, password, firstName, lastName })
+      .then(() => history.push("/auth/login"));
   };
 
   return (

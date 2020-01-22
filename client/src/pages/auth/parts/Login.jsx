@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
 import Spacer from "components/spacer/Spacer";
+import { userService } from "_services/user.services";
 
 function Login() {
   const [email, setEmail] = useState(null);
@@ -10,18 +11,9 @@ function Login() {
   const history = useHistory();
 
   const handleLogin = () => {
-    fetch("http://localhost:4000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password })
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => {
-        localStorage.setItem('accessToken', json.accessToken)
+    userService
+      .login(email, password)
+      .then(() => {
         history.push("/user");
       })
       .catch(e => console.log(e));
