@@ -42,19 +42,18 @@ const userBasketService = (dependency) => {
 
   app.post('/', authenticateToken, (req, res) => {
     dependency.read(data => {
-      // Find user in table
-      const user = data.users.find(u => u.id === req.user.id)
-      if (user == null) return res.sendStatus(400).end()
+      // Find user index in table
+      const userIndex = data.users.findIndex(u => u.id === req.user.id)
+      if (userIndex < 0) return res.sendStatus(400).end()
 
       // Find product in table
       const product = data.products.find(prod => prod.id === req.body.id)
       if (product == null) return res.sendStatus(400).end()
 
-      user.basket.push(product.id);
-      data.user = user;
+      data.users[userIndex].basket.push(product.id);
 
       dependency.write(data, () => {
-        return res.status(200).json(user.basket);
+        return res.status(200).json(data.users[userIndex].basket);
       });
     });
   })

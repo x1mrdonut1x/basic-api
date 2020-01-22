@@ -6,6 +6,8 @@
 
 ### How to use
 
+Test user: `foo@bar.com:foo`
+
 Register, then log in
 
 Click on an item in the basket to remove it.
